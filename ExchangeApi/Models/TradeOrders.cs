@@ -8,5 +8,11 @@ namespace ExchangeApi.Models
         public int Id { get; set; }
         public decimal Amount { get; set; }
 
+        // Many-to-one relationship with TradeOrderTypes
+        public TradeOrderTypes TradeOrderTypeId { get; set; }
+
+        // Many-to-one relationship with Operations
+        public Operations OperationId { get; set; }
+
     }
 }

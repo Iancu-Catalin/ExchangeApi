@@ -6,7 +6,10 @@ namespace ExchangeApi.Models
     {
         [Key]
         public int Id { get; set; }
-        public decimal? Amount { get; set; }
-        public string? FromAdress { get; set; }
+        public decimal Amount { get; set; }
+        public string FromAdress { get; set; }
+
+        // Many-to-one relationship with Operations
+        public Operations OperationId { get; set; }
     }
 }

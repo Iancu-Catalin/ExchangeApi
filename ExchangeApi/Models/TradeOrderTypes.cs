@@ -7,5 +7,9 @@ namespace ExchangeApi.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+
+        // One-to-many relationship with TradeOrders
+        public TradeOrders TradeOrderId { get; set; }
+
     }
 }
