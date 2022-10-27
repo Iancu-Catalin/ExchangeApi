@@ -9,7 +9,7 @@ namespace ExchangeApi.Models
         [Key]
         public int Id { get; set; }
         public decimal Amount { get; set; }
-        public string FromAdress { get; set; }
+        public string FromAddress { get; set; }
 
         public int OperationId { get; set; }
         public Operation Operation { get; set; }

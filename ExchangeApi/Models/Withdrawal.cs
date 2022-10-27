@@ -10,7 +10,7 @@ namespace ExchangeApi.Models
         public int Id { get; set; }
         public decimal Amount { get; set; }
         public bool WasApprovedByUser2fA { get; set; }
-        public string ToAdress { get; set; }
+        public string ToAddress { get; set; }
 
         public int OperationId { get; set; }
         public Operation Operation { get; set; }
