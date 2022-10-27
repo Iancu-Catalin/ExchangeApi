@@ -2,10 +2,11 @@
 
 namespace ExchangeApi.Models
 {
-    public class OperationTypes
+    public class TradeOrders
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        public decimal Amount { get; set; }
+
     }
 }
