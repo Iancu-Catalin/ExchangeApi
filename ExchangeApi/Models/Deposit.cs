@@ -1,15 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExchangeApi.Models
 {
-    public class Deposits
+    [Table("Deposits")]
+    public class Deposit
     {
         [Key]
         public int Id { get; set; }
         public decimal Amount { get; set; }
         public string FromAdress { get; set; }
 
-        // Many-to-one relationship with Operations
-        public Operations OperationId { get; set; }
+        public int OperationId { get; set; }
+        public Operation Operation { get; set; }
     }
 }

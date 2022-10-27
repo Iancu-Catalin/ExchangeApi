@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExchangeApi.Models
 {
-    public class Withdrawals
+    [Table("Withdrawals")]
+    public class Withdrawal
     {
         [Key]
         public int Id { get; set; }
@@ -10,7 +12,7 @@ namespace ExchangeApi.Models
         public bool WasApprovedByUser2fA { get; set; }
         public string ToAdress { get; set; }
 
-        // Many-to-one relationship with Operations
-        public Operations OperationId { get; set; }
+        public int OperationId { get; set; }
+        public Operation Operation { get; set; }
     }
 }
