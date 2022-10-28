@@ -1,4 +1,5 @@
 using ExchangeApi.Data;
+using ExchangeApi.Services;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Register Exchange Service to use it with Dependency Injection in Controllers
+builder.Services.AddTransient<IExchangeService, ExchangeService>();
 
 // Register database
 builder.Services.AddDbContext<AppDbContext>(options =>
