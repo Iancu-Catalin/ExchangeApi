@@ -10,7 +10,7 @@ namespace ExchangeApi.Controllers
     {
         private readonly IExchangeService _exchangeService;
 
-        TradeOrderTypeController(IExchangeService exchangeService)
+        public TradeOrderTypeController(IExchangeService exchangeService)
         {
             _exchangeService = exchangeService;
         }
