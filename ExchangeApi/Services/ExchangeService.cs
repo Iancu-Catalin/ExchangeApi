@@ -1,5 +1,6 @@
 ﻿using ExchangeApi.Data;
 using ExchangeApi.Dtos;
+using ExchangeApi.Utils;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +15,7 @@ namespace ExchangeApi.Services
             _db = db;
         }
 
-        public async Task<IQueryable<DepositDto>> GetDepositsAsync()
+        public async Task<IQueryable<DepositDto>> GetDepositsAsync(PaginationParameters paginationParameters)
         {
             try
             {
@@ -25,7 +26,8 @@ namespace ExchangeApi.Services
                                   FromAdress = d.FromAddress
                               };
 
-                return deposit;
+                return deposit.Skip((paginationParameters.PageNumber - 1) * paginationParameters.PageSize)
+                              .Take(paginationParameters.PageSize);
             }
             catch (Exception ex)
             {
@@ -33,7 +35,7 @@ namespace ExchangeApi.Services
             }
         }
 
-        public async Task<List<TradeOrderDto>> GetTradeOrdersAsync()
+        public async Task<List<TradeOrderDto>> GetTradeOrdersAsync(PaginationParameters paginationParameters)
         {
             try
             {
@@ -44,6 +46,8 @@ namespace ExchangeApi.Services
                         Amount = t.Amount,
                         TradeOrderType = t.TradeOrderType.Name
                     })
+                    .Skip((paginationParameters.PageNumber - 1) * paginationParameters.PageSize)
+                    .Take(paginationParameters.PageSize)
                     .ToListAsync();
 
                 return tradeOrder;
@@ -55,7 +59,7 @@ namespace ExchangeApi.Services
             }
         }
 
-        public async Task<IQueryable<WithdrawalDto>> GetWithdrawalsAsync()
+        public async Task<IQueryable<WithdrawalDto>> GetWithdrawalsAsync(PaginationParameters paginationParameters)
         {
             try
             {
@@ -66,7 +70,8 @@ namespace ExchangeApi.Services
                                      ToAdress = w.ToAddress
                                  };
 
-                return withdrawal;
+                return withdrawal.Skip((paginationParameters.PageNumber - 1) * paginationParameters.PageSize)
+                                 .Take(paginationParameters.PageSize);
             }
             catch (Exception ex)
             {

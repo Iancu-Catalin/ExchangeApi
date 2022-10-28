@@ -1,4 +1,5 @@
 ﻿using ExchangeApi.Services;
+using ExchangeApi.Utils;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,9 @@ namespace ExchangeApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTradeOrders()
+        public async Task<IActionResult> GetTradeOrders([FromQuery] PaginationParameters paginationParameters)
         {
-            var tradeOrders = await _exchangeService.GetTradeOrdersAsync();
+            var tradeOrders = await _exchangeService.GetTradeOrdersAsync(paginationParameters);
 
             if (tradeOrders == null)
             {

@@ -1,4 +1,5 @@
 ﻿using ExchangeApi.Services;
+using ExchangeApi.Utils;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,9 @@ namespace ExchangeApi.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetDeposits()
+        public async Task<IActionResult> GetDeposits([FromQuery] PaginationParameters paginationParameters)
         {
-            var deposits = await _exchangeService.GetDepositsAsync();
+            var deposits = await _exchangeService.GetDepositsAsync(paginationParameters);
 
             if (deposits == null)
             {
