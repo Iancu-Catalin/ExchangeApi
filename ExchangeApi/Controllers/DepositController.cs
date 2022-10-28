@@ -15,6 +15,7 @@ namespace ExchangeApi.Controllers
             _exchangeService = exchangeService;
         }
 
+
         [HttpGet]
         public async Task<IActionResult> GetDeposits()
         {

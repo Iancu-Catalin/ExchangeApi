@@ -1,4 +1,5 @@
 ﻿using ExchangeApi.Data;
+using ExchangeApi.Dtos;
 using ExchangeApi.Models;
 
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,18 @@ namespace ExchangeApi.Services
             _db = db;
         }
 
-        public async Task<List<Deposit>> GetDepositsAsync()
+        public async Task<IQueryable<DepositDto>> GetDepositsAsync()
         {
             try
             {
-                return await _db.Deposits.ToListAsync();
+                var deposit = from d in _db.Deposits
+                              select new DepositDto()
+                              {
+                                  Amount = d.Amount,
+                                  FromAdress = d.FromAddress
+                              };
+
+                return deposit;
             }
             catch (Exception ex)
             {
@@ -26,11 +34,28 @@ namespace ExchangeApi.Services
             }
         }
 
+        /*
         public async Task<List<Operation>> GetOperationsAsync()
         {
             try
             {
                 return await _db.Operations.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        } 
+        */
+
+        public async Task<List<Operation>> GetOperationsAsync(int pageNumber, int pageSize)
+        {
+            try
+            {
+                return await _db.Operations
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -55,6 +80,7 @@ namespace ExchangeApi.Services
             try
             {
                 return await _db.TradeOrders.ToListAsync();
+                //return await _db.TradeOrders.Include(elem => elem.TradeOrderTypeId).ToListAsync();
             }
             catch (Exception ex)
             {
