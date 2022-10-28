@@ -1,6 +1,5 @@
 ﻿using ExchangeApi.Data;
 using ExchangeApi.Dtos;
-using ExchangeApi.Models;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -34,47 +33,6 @@ namespace ExchangeApi.Services
             }
         }
 
-        /*
-        public async Task<List<Operation>> GetOperationsAsync()
-        {
-            try
-            {
-                return await _db.Operations.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        } 
-        */
-
-        public async Task<List<Operation>> GetOperationsAsync(int pageNumber, int pageSize)
-        {
-            try
-            {
-                return await _db.Operations
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<OperationType>> GetOperationTypesAsync()
-        {
-            try
-            {
-                return await _db.OperationTypes.ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
         public async Task<List<TradeOrderDto>> GetTradeOrdersAsync()
         {
             try
@@ -90,18 +48,6 @@ namespace ExchangeApi.Services
 
                 return tradeOrder;
 
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<TradeOrderType>> GetTradeOrderTypesAsync()
-        {
-            try
-            {
-                return await _db.TradeOrderTypes.ToListAsync();
             }
             catch (Exception ex)
             {
