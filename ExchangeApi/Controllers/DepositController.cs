@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExchangeApi.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class DepositController : ControllerBase
     {
         private readonly IExchangeService _exchangeService;
