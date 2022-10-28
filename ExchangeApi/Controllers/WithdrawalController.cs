@@ -17,7 +17,6 @@ namespace ExchangeApi.Controllers
         }
 
         [HttpGet]
-
         public async Task<IActionResult> GetWithdrawals([FromQuery] PaginationParameters paginationParameters)
         {
             var withdrawals = await _exchangeService.GetWithdrawalsAsync(paginationParameters);
