@@ -75,12 +75,21 @@ namespace ExchangeApi.Services
             }
         }
 
-        public async Task<List<TradeOrder>> GetTradeOrdersAsync()
+        public async Task<List<TradeOrderDto>> GetTradeOrdersAsync()
         {
             try
             {
-                return await _db.TradeOrders.ToListAsync();
-                //return await _db.TradeOrders.Include(elem => elem.TradeOrderTypeId).ToListAsync();
+                var tradeOrder = await _db.TradeOrders
+                    .Include(t => t.TradeOrderType)
+                    .Select(t => new TradeOrderDto()
+                    {
+                        Amount = t.Amount,
+                        TradeOrderType = t.TradeOrderType.Name
+                    })
+                    .ToListAsync();
+
+                return tradeOrder;
+
             }
             catch (Exception ex)
             {

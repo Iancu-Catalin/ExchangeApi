@@ -10,7 +10,7 @@ namespace ExchangeApi.Services
         Task<List<Operation>> GetOperationsAsync(int pageNumber, int pageSize); // Will get all the operations
         Task<IQueryable<WithdrawalDto>> GetWithdrawalsAsync(); // Will get all the withdrawals
         Task<IQueryable<DepositDto>> GetDepositsAsync(); // Will get all the deposits
-        Task<List<TradeOrder>> GetTradeOrdersAsync(); // Will get all the Trade Orders
+        Task<List<TradeOrderDto>> GetTradeOrdersAsync(); // Will get all the Trade Orders
         Task<List<TradeOrderType>> GetTradeOrderTypesAsync(); // Will get all the Trade Order Types
     }
 }
