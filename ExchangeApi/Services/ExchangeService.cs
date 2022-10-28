@@ -100,11 +100,18 @@ namespace ExchangeApi.Services
             }
         }
 
-        public async Task<List<Withdrawal>> GetWithdrawalsAsync()
+        public async Task<IQueryable<WithdrawalDto>> GetWithdrawalsAsync()
         {
             try
             {
-                return await _db.Withdrawals.ToListAsync();
+                var withdrawal = from w in _db.Withdrawals
+                                 select new WithdrawalDto()
+                                 {
+                                     Amount = w.Amount,
+                                     ToAdress = w.ToAddress
+                                 };
+
+                return withdrawal;
             }
             catch (Exception ex)
             {
